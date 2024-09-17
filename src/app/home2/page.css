@@ -9,7 +9,6 @@
 }
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
   margin: 0;
   padding: 0;
 }
@@ -52,15 +51,23 @@ body {
   border-radius: 50%;
   object-fit: cover;
 }
-.form-text h2 {
-  font-size: 15px;
-  font-weight: 400;
-}
+
 .form-text h3 {
-  font-size: 12px;
+  font-size: 10px;
   color: black;
 }
 
+.profile-category h4 {
+  margin-top: 10px;
+  font-size: 15px;
+  color: black;
+}
+
+.profile-category label {
+  font-size: 10px;
+  color: black;
+  padding-left: 5px;
+}
 .date-input {
   display: flex;
   flex-direction: column;
@@ -92,6 +99,17 @@ body {
   transition: all 0.5s ease; /* Animasyon geçişi */
   cursor: pointer;
 }
+.selec {
+  border: #ff9100 2px solid;
+  border-radius: 5px;
+}
+.puan {
+  font-size: 20px;
+  color: black;
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+
 /* Mobil cihazlar için stil ayarları */
 @media screen and (max-width: 960px) {
   .profile-container {

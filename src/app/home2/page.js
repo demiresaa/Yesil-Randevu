@@ -1,23 +1,72 @@
 "use client";
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Button, Form, Alert } from "react-bootstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useRouter } from "next/navigation";
+import { withAuth } from "../../components/withAuth";
 
 import "./page.css";
+
 const Home2 = () => {
-  const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValues, setSelectedValues] = useState([]);
   const [isSelectVisible, setIsSelectVisible] = useState(false);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [alertVariant, setAlertVariant] = useState("success");
+  const router = useRouter();
+
+  useEffect(() => {
+    setIsFormValid(selectedValues.length > 0 && startDate && endDate);
+  }, [selectedValues, startDate, endDate]);
 
   const handleChange = (event) => {
-    setSelectedValue(event.target.value);
+    const value = event.target.value;
+    setSelectedValues((prevValues) =>
+      event.target.checked
+        ? [...prevValues, value]
+        : prevValues.filter((v) => v !== value)
+    );
   };
 
   const handleButtonClick = () => {
     setIsSelectVisible(true);
+  };
+
+  const handleRandevuOlustur = () => {
+    if (!isFormValid) {
+      setAlertMessage("Lütfen bilgileri doğru bir şekilde giriniz.");
+      setAlertVariant("danger");
+      setShowAlert(true);
+      return;
+    }
+
+    const randevuBilgileri = {
+      secilenCihazlar: selectedValues,
+      baslangicTarihi: startDate,
+      bitisTarihi: endDate,
+    };
+    console.log("Randevu Bilgileri:", randevuBilgileri);
+
+    setAlertMessage("Randevunuz başarıyla oluşturuldu!");
+    setAlertVariant("success");
+    setShowAlert(true);
+
+    // State'leri sıfırla
+    setSelectedValues([]);
+    setIsSelectVisible(false);
+    setStartDate(null);
+    setEndDate(null);
+
+    // 3 saniye sonra alert'i kaldır ve Home2 sayfasını yeniden yükle
+    setTimeout(() => {
+      setShowAlert(false);
+      router.push("/home2");
+    }, 3000);
   };
 
   const userProfile = {
@@ -25,6 +74,68 @@ const Home2 = () => {
       "https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png",
   };
 
+  const options = [
+    { value: "masaustu_bilgisayarlar", label: "Masaüstü bilgisayarlar" },
+    { value: "dizustu_bilgisayarlar", label: "Dizüstü bilgisayarlar" },
+    { value: "tabletler", label: "Tabletler" },
+    { value: "monitorler", label: "Monitörler" },
+    { value: "klavyeler", label: "Klavyeler" },
+    { value: "fareler", label: "Fareler" },
+    { value: "yazicilar_tarayicilar", label: "Yazıcılar ve tarayıcılar" },
+    { value: "sabit_diskler_ssdler", label: "Sabit diskler ve SSD'ler" },
+    {
+      value: "anakartlar_bilesenler",
+      label: "Anakartlar ve diğer bilgisayar bileşenleri",
+    },
+    { value: "cep_telefonlari", label: "Cep telefonları" },
+    { value: "akilli_telefonlar", label: "Akıllı telefonlar" },
+    { value: "sarik_cihazlari", label: "Şarj cihazları" },
+    { value: "bataryalar", label: "Bataryalar" },
+    { value: "buzdolaplari", label: "Buzdolapları" },
+    { value: "camasir_makineleri", label: "Çamaşır makineleri" },
+    { value: "bulasik_makineleri", label: "Bulaşık makineleri" },
+    { value: "mikrodalga_firinlar", label: "Mikrodalga fırınlar" },
+    { value: "elektrikli_supurgeler", label: "Elektrikli süpürgeler" },
+    { value: "sac_kurutma_makineleri", label: "Saç kurutma makineleri" },
+    { value: "fotokopi_makineleri", label: "Fotokopi makineleri" },
+    { value: "faks_makineleri", label: "Faks makineleri" },
+    { value: "tarayicilar", label: "Tarayıcılar" },
+    { value: "projektorler", label: "Projektörler" },
+    { value: "televizyonlar", label: "Televizyonlar (CRT, LCD, LED, Plazma)" },
+    { value: "dvd_blu_ray_oynaticilar", label: "DVD/Blu-ray oynatıcılar" },
+    { value: "oyun_konsollari", label: "Oyun konsolları" },
+    { value: "ses_sistemleri", label: "Ses sistemleri ve hoparlörler" },
+    { value: "radyo_muzik_calarlar", label: "Radyo ve müzik çalarlar" },
+    { value: "floresan_lambalar", label: "Floresan lambalar" },
+    { value: "led_ampuller", label: "LED ampuller" },
+    {
+      value: "diger_aydinlatma_ekipmanlari",
+      label: "Diğer elektrikli aydınlatma ekipmanları",
+    },
+    { value: "termometreler", label: "Termometreler" },
+    { value: "kan_basinci_monitörleri", label: "Kan basıncı monitörleri" },
+    { value: "sirnga_pompalari", label: "Şırınga pompaları" },
+    { value: "modemler", label: "Modemler" },
+    { value: "routerlar", label: "Routerlar" },
+    { value: "telefon_santralleri", label: "Telefon santralleri" },
+    { value: "antenler", label: "Antenler" },
+    { value: "kullanilmis_piller", label: "Kullanılmış piller" },
+    {
+      value: "sarj_edilebilir_bataryalar",
+      label: "Şarj edilebilir bataryalar",
+    },
+    { value: "arac_akuleri", label: "Araç aküleri" },
+    { value: "elektrikli_oyuncaklar", label: "Elektrikli oyuncaklar" },
+    {
+      value: "elektrikli_aletler",
+      label: "Elektrikli aletler (matkaplar, testere vb.)",
+    },
+    {
+      value: "elektrikli_mutfak_aletleri",
+      label: "Elektrikli mutfak aletleri (kahve makineleri, blender vb.)",
+    },
+    { value: "elektronik_saatler", label: "Elektronik saatler" },
+  ];
   return (
     <div className="profile-container">
       <div className="profile-header">
@@ -34,91 +145,39 @@ const Home2 = () => {
           className="profile-image"
         />
         <h2>Demiresa</h2>
+        <h3 className="puan">
+          Puanım:<span>0</span>
+        </h3>
       </div>
+      {showAlert && (
+        <Alert
+          variant={alertVariant}
+          onClose={() => setShowAlert(false)}
+          dismissible
+        >
+          {alertMessage}
+        </Alert>
+      )}
       {isSelectVisible && (
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
-          <label htmlFor="select-menu" style={{ marginRight: "10px" }}></label>
-          <select
-            id="select-menu"
-            value={selectedValue}
-            onChange={handleChange}
-            style={{ padding: "10px", fontSize: "16px", width: "300px" }}
-          >
-            <option value="">Bir cihaz seçin...</option>
-            <option value="masaustu_bilgisayarlar">
-              Masaüstü bilgisayarlar
-            </option>
-            <option value="dizustu_bilgisayarlar">Dizüstü bilgisayarlar</option>
-            <option value="tabletler">Tabletler</option>
-            <option value="monitorler">Monitörler</option>
-            <option value="klavyeler">Klavyeler</option>
-            <option value="fareler">Fareler</option>
-            <option value="yazicilar_tarayicilar">
-              Yazıcılar ve tarayıcılar
-            </option>
-            <option value="sabit_diskler_ssdler">
-              Sabit diskler ve SSD&apos;ler
-            </option>
-            <option value="anakartlar_bilesenler">
-              Anakartlar ve diğer bilgisayar bileşenleri
-            </option>
-            <option value="cep_telefonlari">Cep telefonları</option>
-            <option value="akilli_telefonlar">Akıllı telefonlar</option>
-            <option value="sarik_cihazlari">Şarj cihazları</option>
-            <option value="bataryalar">Bataryalar</option>
-            <option value="buzdolaplari">Buzdolapları</option>
-            <option value="camasir_makineleri">Çamaşır makineleri</option>
-            <option value="bulasik_makineleri">Bulaşık makineleri</option>
-            <option value="mikrodalga_firinlar">Mikrodalga fırınlar</option>
-            <option value="elektrikli_supurgeler">Elektrikli süpürgeler</option>
-            <option value="sac_kurutma_makineleri">
-              Saç kurutma makineleri
-            </option>
-            <option value="fotokopi_makineleri">Fotokopi makineleri</option>
-            <option value="faks_makineleri">Faks makineleri</option>
-            <option value="tarayicilar">Tarayıcılar</option>
-            <option value="projektorler">Projektörler</option>
-            <option value="televizyonlar">
-              Televizyonlar (CRT, LCD, LED, Plazma)
-            </option>
-            <option value="dvd_blu_ray_oynaticilar">
-              DVD/Blu-ray oynatıcılar
-            </option>
-            <option value="oyun_konsollari">Oyun konsolları</option>
-            <option value="ses_sistemleri">
-              Ses sistemleri ve hoparlörler
-            </option>
-            <option value="radyo_muzik_calarlar">
-              Radyo ve müzik çalarlar
-            </option>
-            <option value="floresan_lambalar">Floresan lambalar</option>
-            <option value="led_ampuller">LED ampuller</option>
-            <option value="diger_aydinlatma_ekipmanlari">
-              Diğer elektrikli aydınlatma ekipmanları
-            </option>
-            <option value="termometreler">Termometreler</option>
-            <option value="kan_basinci_monitörleri">
-              Kan basıncı monitörleri
-            </option>
-            <option value="sirnga_pompalari">Şırınga pompaları</option>
-            <option value="modemler">Modemler</option>
-            <option value="routerlar">Routerlar</option>
-            <option value="telefon_santralleri">Telefon santralleri</option>
-            <option value="antenler">Antenler</option>
-            <option value="kullanilmis_piller">Kullanılmış piller</option>
-            <option value="sarj_edilebilir_bataryalar">
-              Şarj edilebilir bataryalar
-            </option>
-            <option value="arac_akuleri">Araç aküleri</option>
-            <option value="elektrikli_oyuncaklar">Elektrikli oyuncaklar</option>
-            <option value="elektrikli_aletler">
-              Elektrikli aletler (matkaplar, testere vb.)
-            </option>
-            <option value="elektrikli_mutfak_aletleri">
-              Elektrikli mutfak aletleri (kahve makineleri, blender vb.)
-            </option>
-            <option value="elektronik_saatler">Elektronik saatler</option>
-          </select>
+        <div
+          className="profile-category"
+          style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}
+        >
+          <h4>Bir veya birden fazla cihaz seçin:</h4>
+          <div style={{ maxHeight: "200px", overflowY: "auto" }}>
+            {options.map((option) => (
+              <div key={option.value}>
+                <input
+                  type="checkbox"
+                  id={option.value}
+                  value={option.value}
+                  checked={selectedValues.includes(option.value)}
+                  onChange={handleChange}
+                />
+                <label htmlFor={option.value}>{option.label}</label>
+              </div>
+            ))}
+          </div>
           <Form.Group
             className="mb-2 date-input"
             controlId="formAppointmentDate"
@@ -157,15 +216,14 @@ const Home2 = () => {
         </div>
       )}
       <Button
-        variant="secondary"
         type="button"
         className="w-100 randevu-button"
-        onClick={handleButtonClick}
+        onClick={isSelectVisible ? handleRandevuOlustur : handleButtonClick}
       >
-        Randevu Oluştur
+        {isSelectVisible ? "Randevu Oluştur" : "Randevu Oluşturmaya Başla"}
       </Button>
     </div>
   );
 };
 
-export default Home2;
+export default withAuth(Home2);

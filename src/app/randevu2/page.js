@@ -1,6 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import "./page.css";
+import { withAuth } from "../../components/withAuth";
 
 const Randevu = () => {
   const [appointments, setAppointments] = useState([
@@ -120,4 +121,4 @@ const Randevu = () => {
   );
 };
 
-export default Randevu;
+export default withAuth(Randevu);

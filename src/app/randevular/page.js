@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import "./page.css";
+import { withAuth } from "../../components/withAuth";
 
 const Randevu = () => {
   const [appointments] = useState([
@@ -61,6 +62,13 @@ const Randevu = () => {
       date: "2024-08-15",
       isApproved: false,
     },
+    {
+      id: 9,
+      category: "Diş Muayenesi",
+      rating: 4.5,
+      date: "2024-08-15",
+      isApproved: false,
+    },
   ]);
 
   return (
@@ -83,5 +91,4 @@ const Randevu = () => {
     </div>
   );
 };
-
-export default Randevu;
+export default withAuth(Randevu);

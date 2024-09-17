@@ -15,6 +15,11 @@ form {
   padding-bottom: 20px;
   opacity: 1;
 }
+.form-text {
+  font-size: 15px;
+  color: black;
+  font-weight: 700;
+}
 .form-input {
   background: #fffbe6;
   border: none;
@@ -75,6 +80,44 @@ link {
   text-decoration: dashed;
   transition: all 0.5s ease; /* Animasyon geçişi */
 }
+.error-alert {
+  font-size: 15px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 16px;
+  margin-bottom: -20px;
+}
+.success-alert {
+  margin-top: 10px;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.success-icon {
+  background-color: #28a745;
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  font-size: 12px;
+}
+.form-label {
+  font-size: 15px;
+  color: black;
+  font-weight: 700;
+}
 
 @media screen and (max-width: 960px) {
   form {
@@ -87,5 +130,10 @@ link {
   .container {
     width: 100%;
     margin-top: -20px;
+  }
+  .form-text {
+    font-size: 15px;
+    color: black;
+    font-weight: 700;
   }
 }

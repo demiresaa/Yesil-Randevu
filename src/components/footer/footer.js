@@ -1,6 +1,7 @@
 // Footer.js
 import React from "react";
-import "./Footer.css"; // CSS dosyasını ekliyoruz
+import "./footer.css"; // CSS dosyasını ekliyoruz
+import { Instagram, Facebook, Envelope } from "react-bootstrap-icons";
 
 const Footer = () => {
   return (
@@ -13,11 +14,8 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Instagram
+              <Instagram />
             </a>
-          </li>
-          <li>
-            <a href="mailto:example@example.com">Mail</a>
           </li>
           <li>
             <a
@@ -25,7 +23,12 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Facebook
+              <Facebook />
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <Envelope />
             </a>
           </li>
         </ul>

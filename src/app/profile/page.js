@@ -1,17 +1,54 @@
+"use client";
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { supabase } from "../../../lib/supabaseClient";
 import "./page.css";
+import { withAuth } from "../../components/withAuth";
+
+const defaultProfileImage =
+  "https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png";
 
 const Profile = () => {
-  const userProfile = {
-    fullName: "kinya skc",
-    email: "johndoe@example.com",
-    phone: "+90 555 123 4567",
-    dob: "01/01/1990",
-    address: "1234 Main St, Ankara, Türkiye",
-    profileImage:
-      "https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png", // Profil resmi URL'si, burayı gerçek resim URL'si ile değiştirin
-  };
+  const [userProfile, setUserProfile] = useState({
+    fullName: "",
+    email: "",
+    phone: "",
+    dob: "",
+    address: "",
+    profileImage: defaultProfileImage,
+  });
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+
+      if (user) {
+        const { data, error } = await supabase
+          .from("user-details")
+          .select("*")
+          .eq("id", user.id)
+          .single();
+
+        if (error) {
+          console.error("Error fetching user profile:", error);
+        } else if (data) {
+          setUserProfile((prevProfile) => ({
+            ...prevProfile,
+            fullName: data.name || "",
+            email: user.email || "",
+            phone: data.phoneNumber || "",
+            dob: data.birthDate || "",
+            address: data.address || "",
+            profileImage: data.profileImage || defaultProfileImage,
+          }));
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, []);
 
   return (
     <div className="profile-container">
@@ -54,4 +91,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default withAuth(Profile);

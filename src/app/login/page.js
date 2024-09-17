@@ -1,20 +1,74 @@
-// Login.js:
-"use client"; // Eğer bu sayfanın client-side çalışmasını istiyorsanız
+"use client";
 import "bootstrap/dist/css/bootstrap.min.css";
-
-import React, { useState } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
+import { supabase } from "../../../lib/supabaseClient";
+import { useAuth } from "../contexts/AuthContext";
 import "./page.css";
-import Link from "next/link"; // Next.js Link bileşeni
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isKvkkChecked, setIsKvkkChecked] = useState(false);
+  const router = useRouter();
+  const auth = useAuth();
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    const subscription = supabase.auth.onAuthStateChange((event, session) => {
+      if (auth?.user) {
+        router.push("/home2");
+      }
+    });
+
+    return () => {
+      if (subscription && typeof subscription.unsubscribe === "function") {
+        subscription.unsubscribe();
+      }
+    };
+  }, [auth?.user, router]);
+
+  const handleKayitClick = (e) => {
+    e.preventDefault();
+    router.push("/kayit");
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Login attempted with:", { email, password });
-    // Burada tipik olarak sunucunuza bir istek gönderirsinizW
+    setError("");
+
+    if (!isKvkkChecked) {
+      setError("KVKK onayı verilmeden giriş yapılamaz.");
+      return;
+    }
+
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        console.error("Giriş hatası:", error);
+        setError(
+          error.message || "Giriş başarısız. Lütfen bilgilerinizi kontrol edin."
+        );
+        return;
+      }
+
+      if (data?.user) {
+        console.log("Giriş başarılı!", data.user);
+        router.push("/home2");
+      } else {
+        setError(
+          "Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+        );
+      }
+    } catch (err) {
+      console.error("Beklenmeyen hata:", err);
+      setError("Bir hata oluştu. Lütfen tekrar deneyin.");
+    }
   };
 
   return (
@@ -30,6 +84,7 @@ export function Login() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </Form.Group>
             <Form.Group controlId="formBasicPassword">
@@ -40,6 +95,7 @@ export function Login() {
                 placeholder="Şifre"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </Form.Group>
             <Button
@@ -49,32 +105,37 @@ export function Login() {
             >
               Giriş Yap
             </Button>
-            <Link href="/kayit" className="kayıt">
+            {error && (
+              <Alert variant="danger" className="error-alert">
+                {error}
+              </Alert>
+            )}
+            <Button variant="link" onClick={handleKayitClick} className="kayıt">
               Kayıt Ol
-            </Link>
-            <Link
+            </Button>
+            <a
               className="kvkk"
+              target="_blank"
               href="https://www.resmigazete.gov.tr/eskiler/2018/03/20180310-5.htm"
+              rel="noopener noreferrer"
             >
               KVKK Metni Okumak İçin Tıklayın
-            </Link>
-
-            <input
-              type="checkbox"
-              id="cbx"
-              style={{ opacity: 0, position: "absolute" }}
-            />
-            <label for="cbx" className="check">
-              <svg width="18px" height="18px" viewBox="0 0 18 18">
-                <path d="M1,9 L1,3.5 C1,2 2,1 3.5,1 L14.5,1 C16,1 17,2 17,3.5 L17,14.5 C17,16 16,17 14.5,17 L3.5,17 C2,17 1,16 1,14.5 L1,9 Z"></path>
-                <polyline points="1 9 7 14 15 4"></polyline>
-              </svg>
-            </label>
+            </a>
+            <div className="align-items-center mb-3">
+              <div className="custom-control custom-checkbox mr-auto">
+                <input
+                  type="checkbox"
+                  className="custom-control-input"
+                  id="cbx"
+                  checked={isKvkkChecked}
+                  onChange={() => setIsKvkkChecked(!isKvkkChecked)}
+                />
+              </div>
+            </div>
           </Form>
         </Col>
       </Row>
     </Container>
   );
 }
-
 export default Login;

@@ -5,9 +5,9 @@
 
 body {
   background-color: #fffbe6;
+  font-family: Arial, serif;
 }
 .pages {
-  color: gray;
   text-align: center;
   font-size: 3.5rem;
   margin-top: 10%;

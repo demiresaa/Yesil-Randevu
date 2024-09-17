@@ -13,16 +13,19 @@ form {
   padding-bottom: 20px;
 }
 .form-input {
-  border: #fffbe6;
+  background: #fffbe6;
+  border: none;
   border-bottom: 3px solid#ff9100;
-  background-color: #fffbe6;
+}
+.form-input:hover {
+  border: 3px solid#ff9100;
 }
 .form-input:focus {
   outline: none; /* Varsayılan outline kenarlığını kaldırır */
   border-color: #ff9100; /* Kenarlığı yeşil yapar */
-  border: #ff9100 2px solid;
+  border: 3px solid#ff9100;
   box-shadow: none;
-  background-color: #fffbe6;
+  background-color: none;
 }
 .login-button {
   background: #00712d;
@@ -55,70 +58,12 @@ form {
   font-size: 15px;
   display: block;
 }
-.check {
-  cursor: pointer;
-  position: relative;
-  margin: auto;
-  width: 18px;
-  height: 18px;
-  -webkit-tap-highlight-color: transparent;
-  transform: translate3d(0, 0, 0);
-  margin-top: -20px;
+.error-alert {
+  font-size: 15px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin-top: 16px;
   margin-bottom: -20px;
-}
-
-.check:before {
-  content: "";
-  position: absolute;
-  top: -15px;
-  left: -15px;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: rgba(34, 50, 84, 0.03);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.check svg {
-  position: relative;
-  z-index: 1;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke: #00712d;
-  stroke-width: 1.5;
-  transform: translate3d(0, 0, 0);
-  transition: all 0.2s ease;
-}
-
-.check svg path {
-  stroke-dasharray: 60;
-  stroke-dashoffset: 0;
-}
-
-.check svg polyline {
-  stroke-dasharray: 22;
-  stroke-dashoffset: 66;
-}
-
-.check:hover svg {
-  stroke: #00712d;
-}
-
-#cbx:checked + .check svg {
-  stroke: #00712d;
-}
-
-#cbx:checked + .check svg path {
-  stroke-dashoffset: 60;
-  transition: all 0.3s linear;
-}
-
-#cbx:checked + .check svg polyline {
-  stroke-dashoffset: 42;
-  transition: all 0.2s linear;
-  transition-delay: 0.15s;
 }
 
 @media screen and (max-width: 960px) {
