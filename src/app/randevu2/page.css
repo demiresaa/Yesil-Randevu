@@ -1,0 +1,119 @@
+.appointments-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: -90px;
+}
+
+.appointments-container h2 {
+  margin: 0;
+  font-size: 20px; /* Küçültülmüş başlık font boyutu */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.appointments-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointments-header,
+.appointments-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.appointments-header-item {
+  font-weight: bold;
+  flex: 1;
+  text-align: center;
+  font-size: 14px; /* Küçültülmüş başlık font boyutu */
+}
+
+.appointments-item {
+  flex: 1;
+  text-align: center;
+  font-size: 14px; /* Küçültülmüş veri font boyutu */
+}
+
+.btn {
+  padding: 5px 10px;
+  font-size: 12px; /* Küçültülmüş buton font boyutu */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.btn-approve {
+  background: #00712d;
+  color: white;
+}
+.btn-approve:hover {
+  background: #00712d;
+  color: white;
+  opacity: 0.7;
+}
+
+.btn-delete {
+  background-color: #f44336;
+  color: white;
+}
+.btn-delete:hover {
+  opacity: 0.7;
+}
+.approved-icon {
+  font-size: 16px; /* Onay işareti font boyutu */
+}
+
+.appointments-row:last-child {
+  border-bottom: none;
+}
+
+/* Mobil cihazlar için stil ayarları */
+@media screen and (max-width: 768px) {
+  .appointments-container {
+    padding: 15px;
+    margin: 20px auto;
+  }
+
+  .appointments-container h2 {
+    font-size: 20px; /* Mobilde başlık font boyutu */
+    margin-bottom: 15px;
+  }
+
+  .appointments-header,
+  .appointments-row {
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
+
+  .appointments-header-item,
+  .appointments-item {
+    font-size: 12px; /* Mobilde yazı font boyutu */
+    text-align: left;
+  }
+
+  .appointments-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .appointments-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .btn {
+    padding: 4px 8px;
+    font-size: 10px; /* Mobilde buton font boyutu */
+  }
+}

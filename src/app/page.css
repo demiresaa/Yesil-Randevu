@@ -1,0 +1,62 @@
+.home-container {
+  font-family: Arial, serif;
+  padding: 20px;
+  max-width: 80%; /* Yatayda kaplayacağı alan genişliği */
+  margin: 10% auto; /* Ortalamak için margin ayarı */
+  display: flex; /* Flexbox düzeni */
+  align-items: center; /* Dikeyde ortalamak */
+  justify-content: space-between; /* İçerikleri iki yana dağıtmak */
+}
+
+.hero-section {
+  margin-left: -100px;
+  background: #00712d;
+  color: white;
+  padding: 40px;
+  border-radius: 50px;
+  opacity: 0.9;
+  width: 40%;
+  max-height: 700px;
+  margin-right: 20px; /* Görüntü ve metin arasına boşluk eklemek için */
+}
+
+.hero-section h1 {
+  color: #ff9100;
+  font-size: 3.5rem;
+  margin-bottom: 10px;
+}
+
+.hero-section p {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.hero-section h4 {
+  font-size: 2rem;
+  margin-top: 10px;
+  color: #fffbe6;
+}
+
+.recycling-image {
+  width: 70%; /* Görüntü genişliği */
+  border-radius: 10px; /* Hafif yuvarlatma */
+  max-height: 620px;
+  margin-right: -100px;
+}
+
+@media screen and (max-width: 960px) {
+  .home-container {
+    flex-direction: column; /* Ekran daraldığında dikey hizalama */
+    max-width: 100%;
+  }
+
+  .hero-section {
+    width: 100%; /* Mobilde tam genişlik */
+    margin-bottom: 20px;
+  }
+
+  .recycling-image {
+    width: 100%; /* Mobilde tam genişlik */
+    margin: 0; /* Kenar boşluklarını sıfırla */
+  }
+}

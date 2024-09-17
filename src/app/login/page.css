@@ -1,0 +1,141 @@
+body {
+  background-color: #fffbe6;
+}
+.container {
+  margin-top: -100px;
+  margin-bottom: 50px;
+}
+form {
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 3px solid#ff9100;
+  border-radius: 8px;
+  padding-bottom: 20px;
+}
+.form-input {
+  border: #fffbe6;
+  border-bottom: 3px solid#ff9100;
+  background-color: #fffbe6;
+}
+.form-input:focus {
+  outline: none; /* Varsayılan outline kenarlığını kaldırır */
+  border-color: #ff9100; /* Kenarlığı yeşil yapar */
+  border: #ff9100 2px solid;
+  box-shadow: none;
+  background-color: #fffbe6;
+}
+.login-button {
+  background: #00712d;
+  border: none;
+  font-size: medium;
+  margin-bottom: -2rem;
+}
+.login-button:hover {
+  background: #00712d;
+  opacity: 0.7;
+}
+.kayıt {
+  color: white;
+  border: none;
+  font-size: 15px;
+  font-weight: bold;
+  background: #00712d;
+  -webkit-text-decoration: dashed;
+  text-decoration: dashed;
+  padding: 5px;
+  border-radius: 5px;
+}
+.kayıt:hover {
+  font-size: 20px;
+  text-decoration: dashed;
+  transition: all 0.5s ease; /* Animasyon geçişi */
+  opacity: 0.7;
+}
+.kvkk {
+  font-size: 15px;
+  display: block;
+}
+.check {
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+  margin-top: -20px;
+  margin-bottom: -20px;
+}
+
+.check:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(34, 50, 84, 0.03);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.check svg {
+  position: relative;
+  z-index: 1;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #00712d;
+  stroke-width: 1.5;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease;
+}
+
+.check svg path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+}
+
+.check svg polyline {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 66;
+}
+
+.check:hover svg {
+  stroke: #00712d;
+}
+
+#cbx:checked + .check svg {
+  stroke: #00712d;
+}
+
+#cbx:checked + .check svg path {
+  stroke-dashoffset: 60;
+  transition: all 0.3s linear;
+}
+
+#cbx:checked + .check svg polyline {
+  stroke-dashoffset: 42;
+  transition: all 0.2s linear;
+  transition-delay: 0.15s;
+}
+
+@media screen and (max-width: 960px) {
+  form {
+    width: 100%;
+    max-width: 300px; /* Formun genişliğini sınırla */
+    margin: auto; /* Formu ortala */
+    border: 3px solid#ff9100;
+    border-radius: 5px;
+    margin-top: 110px;
+  }
+  .form-input {
+    margin-top: -20px;
+    margin-bottom: -20px;
+  }
+  .kayıt {
+    margin-bottom: -20px;
+    margin-top: -30px;
+  }
+}
