@@ -1,10 +1,9 @@
-"use client";
 /* eslint-disable @next/next/no-img-element */
+"use client";
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../../lib/supabaseClient";
-import "./page.css";
 import { withAuth } from "../../components/withAuth";
-
+import styles from "./Profile.module.css";
 const defaultProfileImage =
   "https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png";
 
@@ -34,15 +33,14 @@ const Profile = () => {
         if (error) {
           console.error("Error fetching user profile:", error);
         } else if (data) {
-          setUserProfile((prevProfile) => ({
-            ...prevProfile,
+          setUserProfile({
             fullName: data.name || "",
             email: user.email || "",
             phone: data.phoneNumber || "",
             dob: data.birthDate || "",
             address: data.address || "",
             profileImage: data.profileImage || defaultProfileImage,
-          }));
+          });
         }
       }
     };
@@ -50,42 +48,30 @@ const Profile = () => {
     fetchUserProfile();
   }, []);
 
+  const ProfileCategory = ({ title, value }) => (
+    <div className={styles.profileCategory}>
+      <h3>{title}</h3>
+      <p>{value}</p>
+    </div>
+  );
+
   return (
-    <div className="profile-container">
-      <div className="profile-header">
+    <div className={styles.profileContainer}>
+      <div className={styles.profileHeader}>
         <img
           src={userProfile.profileImage}
           alt="Profile"
-          className="profile-image"
+          className={styles.profileImage}
         />
         <h2>Kullanıcı Profili</h2>
       </div>
 
-      <div className="profile-row">
-        <div className="profile-category">
-          <h3>Ad ve Soyad</h3>
-          <p>{userProfile.fullName}</p>
-        </div>
-
-        <div className="profile-category">
-          <h3>Email</h3>
-          <p>{userProfile.email}</p>
-        </div>
-
-        <div className="profile-category">
-          <h3>Telefon Numarası</h3>
-          <p>{userProfile.phone}</p>
-        </div>
-
-        <div className="profile-category">
-          <h3>Doğum Tarihi</h3>
-          <p>{userProfile.dob}</p>
-        </div>
-
-        <div className="profile-category">
-          <h3>Adreslerim</h3>
-          <p>{userProfile.address}</p>
-        </div>
+      <div className={styles.profileRow}>
+        <ProfileCategory title="Ad ve Soyad" value={userProfile.fullName} />
+        <ProfileCategory title="Email" value={userProfile.email} />
+        <ProfileCategory title="Telefon Numarası" value={userProfile.phone} />
+        <ProfileCategory title="Doğum Tarihi" value={userProfile.dob} />
+        <ProfileCategory title="Adreslerim" value={userProfile.address} />
       </div>
     </div>
   );

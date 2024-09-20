@@ -1,11 +1,9 @@
 "use client";
-import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useState } from "react";
-import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
-import "./page.css";
 import { supabase } from "../../../lib/supabaseClient";
-import { useRouter } from "next/navigation"; // Değişiklik burada
-import { motion } from "framer-motion"; // Animasyon için framer-motion'ı import edin
+import { useRouter } from "next/navigation"; // Routing
+import { motion } from "framer-motion"; // For animations
+import "./page.css"; // Import your CSS
 
 export function Kayit() {
   const [name, setName] = useState("");
@@ -13,25 +11,27 @@ export function Kayit() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [day, setDay] = useState("");
   const [address, setAddress] = useState("");
-
+  const [day, setDay] = useState("");
   const [month, setMonth] = useState("");
   const [year, setYear] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const router = useRouter();
+  const [isKvkkChecked, setIsKvkkChecked] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    if (!isKvkkChecked) {
+      setError("KVKK onayı verilmeden giriş yapılamaz.");
+      return;
+    }
 
-    // Şifre eşleşmesi kontrolü
     if (password !== confirmPassword) {
       setError("Şifreler eşleşmiyor.");
       return;
     }
 
-    // Yaş kontrolü
     const today = new Date();
     const birthDate = new Date(year, month - 1, day);
     const age = today.getFullYear() - birthDate.getFullYear();
@@ -48,7 +48,6 @@ export function Kayit() {
     }
 
     try {
-      // Supabase'e kullanıcı kaydı
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -59,16 +58,15 @@ export function Kayit() {
         return;
       }
 
-      // Ekstra bilgileri 'profiles' tablosuna kaydetme
       const { error: insertError } = await supabase
         .from("user-details")
         .insert([
           {
-            id: data.user.id, // Supabase tarafından oluşturulan user id
+            id: data.user.id,
             name,
             phoneNumber,
             address,
-            birthDate: birthDate.toISOString().split("T")[0], // YYY-MM-DD formatında
+            birthDate: birthDate.toISOString().split("T")[0],
           },
         ]);
 
@@ -82,7 +80,7 @@ export function Kayit() {
       console.log("Kayıt başarılı:", data);
       setSuccess(true);
       setTimeout(() => {
-        router.push("/kayit"); // Ana sayfaya yönlendirme
+        router.push("/kayit");
       }, 1500);
     } catch (error) {
       setError("Beklenmeyen bir hata oluştu: " + error.message);
@@ -90,89 +88,79 @@ export function Kayit() {
   };
 
   return (
-    <Container>
-      <Row className="justify-content-md-center mt-5">
-        <Col s={10} lg={4}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group className="mb-1" controlId="formBasicEmail">
-              <Form.Label className="form-text"></Form.Label>
-              <Form.Control
-                className="form-input"
+    <div className="custom-container">
+      <div className="custom-row">
+        <div className="custom-col">
+          <form onSubmit={handleSubmit} className="custom-form">
+            <div className="custom-form-group">
+              <input
+                className="custom-form-input"
                 type="text"
                 placeholder="Ad ve Soyad"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <Form.Label className="form-text"></Form.Label>
-              <Form.Control
-                className="form-input"
+            </div>
+            <div className="custom-form-group">
+              <input
+                className="custom-form-input"
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
-            </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicPhoneNumber">
-              <Form.Label className="form-text"></Form.Label>
-              <Form.Control
-                className="form-input"
+            </div>
+            <div className="custom-form-group">
+              <input
+                className="custom-form-input"
                 type="tel"
                 placeholder="Telefon No"
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
-              <Form.Group className="mb-2" controlId="formBasicAddress">
-                <Form.Label className="form-text"></Form.Label>
-                <Form.Control
-                  className="form-input"
-                  as="textarea"
-                  rows={3}
-                  placeholder="Adres"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                />
-              </Form.Group>
-            </Form.Group>
-            <Form.Group className="mb-2" controlId="formBasicPassword">
-              <Form.Label className="form-text"></Form.Label>
-              <Form.Control
-                className="form-input"
+            </div>
+            <div className="custom-form-group">
+              <textarea
+                className="custom-form-input"
+                placeholder="Adres"
+                rows={3}
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              ></textarea>
+            </div>
+            <div className="custom-form-group">
+              <input
+                className="custom-form-input"
                 type="password"
                 placeholder="Şifre"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
-            </Form.Group>
-
-            <Form.Group className="mb-2" controlId="formConfirmPassword">
-              <Form.Label className="form-text"></Form.Label>
-              <Form.Control
-                className="form-input"
+            </div>
+            <div className="custom-form-group">
+              <input
+                className="custom-form-input"
                 type="password"
                 placeholder="Şifreyi Tekrar Gir"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
+                required
               />
-            </Form.Group>
-
-            <Form.Group className="mb-2" controlId="formDateOfBirth">
-              <Form.Label className="form-text">Doğum Tarihi</Form.Label>
-              <div className="d-flex">
-                <Form.Select
-                  className="me-2"
-                  value={day}
-                  onChange={(e) => setDay(e.target.value)}
-                >
+            </div>
+            <div className="custom-form-group">
+              <label className="custom-form-text">Doğum Tarihi</label>
+              <div className="custom-dob-inputs">
+                <select value={day} onChange={(e) => setDay(e.target.value)}>
                   <option value="">Gün</option>
                   {[...Array(31).keys()].map((d) => (
                     <option key={d + 1} value={d + 1}>
                       {d + 1}
                     </option>
                   ))}
-                </Form.Select>
-
-                <Form.Select
-                  className="me-2"
+                </select>
+                <select
                   value={month}
                   onChange={(e) => setMonth(e.target.value)}
                 >
@@ -182,48 +170,51 @@ export function Kayit() {
                       {m + 1}
                     </option>
                   ))}
-                </Form.Select>
-
-                <Form.Select
-                  value={year}
-                  onChange={(e) => setYear(e.target.value)}
-                >
+                </select>
+                <select value={year} onChange={(e) => setYear(e.target.value)}>
                   <option value="">Yıl</option>
                   {[...Array(100).keys()].map((y) => (
                     <option key={2023 - y} value={2023 - y}>
                       {2023 - y}
                     </option>
                   ))}
-                </Form.Select>
+                </select>
               </div>
-              {success && (
-                <motion.div
-                  initial={{ opacity: 0, y: -50 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="success-alert"
-                >
-                  <span className="success-icon">✓</span>
-                  Kayıt başarılı! Yönlendiriliyorsunuz...
-                </motion.div>
-              )}
-              {error && (
-                <Alert variant="danger" className="error-alert">
-                  {error}
-                </Alert>
-              )}
-            </Form.Group>
-
-            <Button
-              variant="secondary"
-              type="submit"
-              className="w-100 login-button"
-            >
+            </div>
+            <button type="submit" className="custom-login-button">
               Kayıt Ol
-            </Button>
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+            </button>
+            {success && (
+              <motion.div
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="custom-success-alert"
+              >
+                Kayıt başarılı! Yönlendiriliyorsunuz...
+              </motion.div>
+            )}
+            {error && <div className="custom-error-alert">{error}</div>}
+            <a
+              className="kvkk"
+              target="_blank"
+              href="https://www.resmigazete.gov.tr/eskiler/2018/03/20180310-5.htm"
+              rel="noopener noreferrer"
+            >
+              KVKK Metni Okumak İçin Tıklayın
+            </a>
+            <div className="kvkk-kutu">
+              <input
+                type="checkbox"
+                id="cbx"
+                checked={isKvkkChecked}
+                onChange={() => setIsKvkkChecked(!isKvkkChecked)}
+              />
+              <label htmlFor="cbx">KVKK Onayı</label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 

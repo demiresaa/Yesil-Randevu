@@ -1,11 +1,11 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
-import "./NavBar.css";
 import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icon.js";
 import { Person } from "react-bootstrap-icons";
 import { supabase } from "../../../lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import "./NavBar.css";
 
 function NavBar() {
   const [click, setClick] = useState(false);
@@ -35,96 +35,50 @@ function NavBar() {
     }
   };
 
-  const handleNavigation = (path) => {
-    router.push(path);
-  };
-
   const homeLink = user ? "/home2" : "/";
 
   return (
     <>
       <nav className="navbar">
         <div className="nav-container">
-          <a
-            href={homeLink}
-            className="nav-logo"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavigation(homeLink);
-            }}
-          >
+          <Link href={homeLink} className="nav-logo">
             <span>Yeşil Randevu</span>
-          </a>
+          </Link>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
-            <li className="nav-item">
-              <a
-                href={homeLink}
-                className="nav-links"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation(homeLink);
-                }}
-              >
+            <li onClick={handleClick} className="nav-item">
+              <Link href={homeLink} className="nav-links">
                 Ana Sayfa
-              </a>
+              </Link>
             </li>
-            <li className="nav-item">
-              <a
-                href="/hakkimizda"
-                className="nav-links"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation("/hakkimizda");
-                }}
-              >
+            <li onClick={handleClick} className="nav-item">
+              <Link href="/hakkimizda" className="nav-links">
                 Hakkımızda
-              </a>
+              </Link>
             </li>
             {user ? (
               <>
-                <li className="nav-item">
-                  <a
-                    href="/profile"
-                    className="nav-links"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavigation("/profile");
-                    }}
-                  >
+                <li onClick={handleClick} className="nav-item">
+                  <Link href="/profile" className="nav-links">
                     Kişisel Bilgilerim
-                  </a>
+                  </Link>
                 </li>
-                <li className="nav-item">
-                  <a
-                    href="/randevular"
-                    className="nav-links"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleNavigation("/randevular");
-                    }}
-                  >
+                <li onClick={handleClick} className="nav-item">
+                  <Link href="/randevular" className="nav-links">
                     Randevularım
-                  </a>
+                  </Link>
                 </li>
-                <li className="nav-item nav-item1">
+                <li onClick={handleClick} className="nav-item nav-item1">
                   <a href="#" className="nav-links" onClick={handleSignOut}>
                     <Person className="bi bi-person" /> Çıkış Yap
                   </a>
                 </li>
               </>
             ) : (
-              <li className="nav-item nav-item1">
-                <a
-                  href="/login"
-                  className="nav-links"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigation("/login");
-                  }}
-                >
+              <li onClick={handleClick} className="nav-item nav-item1">
+                <Link href="/login" className="nav-links">
                   <Person className="bi bi-person" /> Giriş Yap
-                </a>
+                </Link>
               </li>
             )}
           </ul>

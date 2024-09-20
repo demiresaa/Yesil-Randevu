@@ -4,11 +4,6 @@
 }
 
 body {
-  background-color: #fffbe6;
+  background: #fffbe6;
   font-family: Arial, serif;
-}
-.pages {
-  text-align: center;
-  font-size: 3.5rem;
-  margin-top: 10%;
 }

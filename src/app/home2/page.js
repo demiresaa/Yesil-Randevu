@@ -1,13 +1,11 @@
-"use client";
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect } from "react";
-import { Button, Form, Alert } from "react-bootstrap";
+"use client";
+import React, { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useRouter } from "next/navigation";
 import { withAuth } from "../../components/withAuth";
-
-import "./page.css";
+import styles from "./Home2.module.css";
+import { AppointmentContext } from "../../context/AppointmentContext";
 
 const Home2 = () => {
   const [selectedValues, setSelectedValues] = useState([]);
@@ -18,7 +16,7 @@ const Home2 = () => {
   const [showAlert, setShowAlert] = useState(false);
   const [alertMessage, setAlertMessage] = useState("");
   const [alertVariant, setAlertVariant] = useState("success");
-  const router = useRouter();
+  const { addAppointment } = useContext(AppointmentContext);
 
   useEffect(() => {
     setIsFormValid(selectedValues.length > 0 && startDate && endDate);
@@ -40,7 +38,7 @@ const Home2 = () => {
   const handleRandevuOlustur = () => {
     if (!isFormValid) {
       setAlertMessage("Lütfen bilgileri doğru bir şekilde giriniz.");
-      setAlertVariant("danger");
+      setAlertVariant("error");
       setShowAlert(true);
       return;
     }
@@ -50,30 +48,28 @@ const Home2 = () => {
       baslangicTarihi: startDate,
       bitisTarihi: endDate,
     };
-    console.log("Randevu Bilgileri:", randevuBilgileri);
+
+    addAppointment({
+      category: randevuBilgileri.secilenCihazlar.join(", "),
+      start_date: randevuBilgileri.baslangicTarihi,
+      end_date: randevuBilgileri.bitisTarihi,
+      isApproved: false,
+    });
 
     setAlertMessage("Randevunuz başarıyla oluşturuldu!");
     setAlertVariant("success");
     setShowAlert(true);
 
-    // State'leri sıfırla
     setSelectedValues([]);
     setIsSelectVisible(false);
     setStartDate(null);
     setEndDate(null);
-
-    // 3 saniye sonra alert'i kaldır ve Home2 sayfasını yeniden yükle
-    setTimeout(() => {
-      setShowAlert(false);
-      router.push("/home2");
-    }, 3000);
   };
 
   const userProfile = {
     profileImage:
       "https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png",
   };
-
   const options = [
     { value: "masaustu_bilgisayarlar", label: "Masaüstü bilgisayarlar" },
     { value: "dizustu_bilgisayarlar", label: "Dizüstü bilgisayarlar" },
@@ -89,7 +85,7 @@ const Home2 = () => {
     },
     { value: "cep_telefonlari", label: "Cep telefonları" },
     { value: "akilli_telefonlar", label: "Akıllı telefonlar" },
-    { value: "sarik_cihazlari", label: "Şarj cihazları" },
+    { value: "sarj_cihazlari", label: "Şarj cihazları" },
     { value: "bataryalar", label: "Bataryalar" },
     { value: "buzdolaplari", label: "Buzdolapları" },
     { value: "camasir_makineleri", label: "Çamaşır makineleri" },
@@ -136,37 +132,31 @@ const Home2 = () => {
     },
     { value: "elektronik_saatler", label: "Elektronik saatler" },
   ];
+
   return (
-    <div className="profile-container">
-      <div className="profile-header">
+    <div className={styles.profileContainer}>
+      <div className={styles.profileHeader}>
         <img
           src={userProfile.profileImage}
           alt="Profile"
-          className="profile-image"
+          className={styles.profileImage}
         />
         <h2>Demiresa</h2>
-        <h3 className="puan">
+        <h3 className={styles.puan}>
           Puanım:<span>0</span>
         </h3>
       </div>
       {showAlert && (
-        <Alert
-          variant={alertVariant}
-          onClose={() => setShowAlert(false)}
-          dismissible
-        >
+        <div className={`${styles.alert} ${styles[alertVariant]}`}>
           {alertMessage}
-        </Alert>
+        </div>
       )}
       {isSelectVisible && (
-        <div
-          className="profile-category"
-          style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}
-        >
+        <div className={styles.profileCategory}>
           <h4>Bir veya birden fazla cihaz seçin:</h4>
-          <div style={{ maxHeight: "200px", overflowY: "auto" }}>
+          <div className={styles.optionsContainer}>
             {options.map((option) => (
-              <div key={option.value}>
+              <div key={option.value} className={styles.optionItem}>
                 <input
                   type="checkbox"
                   id={option.value}
@@ -178,15 +168,9 @@ const Home2 = () => {
               </div>
             ))}
           </div>
-          <Form.Group
-            className="mb-2 date-input"
-            controlId="formAppointmentDate"
-          >
-            <Form.Label className="form-text">
-              <h3> Randevu Başlangıç ve Bitiş Saatini Seçin</h3>
-            </Form.Label>
+          <div className={styles.dateInputContainer}>
+            <h3>Randevu Başlangıç ve Bitiş Saatini Seçin</h3>
             <DatePicker
-              className="form-input-date"
               selected={startDate}
               onChange={(date) => setStartDate(date)}
               showTimeSelect
@@ -195,14 +179,9 @@ const Home2 = () => {
               timeIntervals={15}
               timeCaption="Saat"
               minDate={new Date()}
+              className={styles.dateInput}
             />
-
-            <Form.Label
-              className="form-text"
-              style={{ marginTop: "20px" }}
-            ></Form.Label>
             <DatePicker
-              className="form-input-date"
               selected={endDate}
               onChange={(date) => setEndDate(date)}
               showTimeSelect
@@ -211,17 +190,17 @@ const Home2 = () => {
               timeIntervals={15}
               timeCaption="Saat"
               minDate={startDate || new Date()}
+              className={styles.dateInput}
             />
-          </Form.Group>
+          </div>
         </div>
       )}
-      <Button
-        type="button"
-        className="w-100 randevu-button"
+      <button
+        className={styles.randevuButton}
         onClick={isSelectVisible ? handleRandevuOlustur : handleButtonClick}
       >
         {isSelectVisible ? "Randevu Oluştur" : "Randevu Oluşturmaya Başla"}
-      </Button>
+      </button>
     </div>
   );
 };

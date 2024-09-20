@@ -1,86 +1,103 @@
-body {
-  background-color: #fffbe6;
-}
 .container {
-  margin-top: -100px;
-  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fffbe6;
+  margin-top: 80px;
+  padding-bottom: 80px;
 }
-form {
+
+.row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 960px;
+  padding: 20px;
+  height: 450px;
+}
+
+.col {
+  width: 100%;
+  max-width: 350px;
+  background-color: #fffbe6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding-left: 20px;
   padding-right: 20px;
   border: 3px solid#ff9100;
   border-radius: 8px;
   padding-bottom: 20px;
 }
-.form-input {
-  background: #fffbe6;
-  border: none;
-  border-bottom: 3px solid#ff9100;
+
+.form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
-.form-input:hover {
-  border: 3px solid#ff9100;
+
+.form-group {
+  margin-bottom: 20px;
 }
+
 .form-input:focus {
   outline: none; /* Varsayılan outline kenarlığını kaldırır */
   border-color: #ff9100; /* Kenarlığı yeşil yapar */
-  border: 3px solid#ff9100;
   box-shadow: none;
   background-color: none;
 }
-.login-button {
-  background: #00712d;
-  border: none;
-  font-size: medium;
-  margin-bottom: -2rem;
-}
-.login-button:hover {
-  background: #00712d;
-  opacity: 0.7;
-}
-.kayıt {
-  color: white;
-  border: none;
-  font-size: 15px;
+.form-text {
+  margin-bottom: 10px;
   font-weight: bold;
-  background: #00712d;
-  -webkit-text-decoration: dashed;
-  text-decoration: dashed;
-  padding: 5px;
-  border-radius: 5px;
-}
-.kayıt:hover {
-  font-size: 20px;
-  text-decoration: dashed;
-  transition: all 0.5s ease; /* Animasyon geçişi */
-  opacity: 0.7;
-}
-.kvkk {
-  font-size: 15px;
-  display: block;
-}
-.error-alert {
-  font-size: 15px;
-  padding: 8px 12px;
-  border-radius: 4px;
-  margin-top: 16px;
-  margin-bottom: -20px;
 }
 
-@media screen and (max-width: 960px) {
-  form {
-    width: 100%;
-    max-width: 300px; /* Formun genişliğini sınırla */
-    margin: auto; /* Formu ortala */
-    border: 3px solid#ff9100;
-    border-radius: 5px;
-    margin-top: 110px;
-  }
-  .form-input {
-    margin-top: -20px;
-    margin-bottom: -20px;
-  }
-  .kayıt {
-    margin-bottom: -20px;
-    margin-top: -30px;
+.form-input {
+  border: none;
+  width: 90%;
+  padding: 12px;
+  border-bottom: 2px solid #ff9100;
+  border-radius: 4px;
+  background-color: #fffbe6;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.login-button {
+  background-color: #00712d;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 50px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.login-button:hover {
+  cursor: pointer;
+}
+
+.kayıt-button {
+  background-color: #00712d;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+.error-alert {
+  background-color: #ffcccc;
+  padding: 10px;
+  border-radius: 4px;
+  color: #ff0000;
+  margin-top: 20px;
+}
+@media (max-width: 768px) {
+  .container {
+    margin-top: 102px;
+    padding-bottom: 99.5px;
   }
 }

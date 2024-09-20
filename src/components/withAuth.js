@@ -1,5 +1,5 @@
 import { useRouter } from "next/navigation";
-import { useAuth } from "../app/contexts/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 export function withAuth(WrappedComponent) {
   return function AuthenticatedComponent(props) {

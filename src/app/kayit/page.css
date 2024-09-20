@@ -1,84 +1,56 @@
-body {
+.custom-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #fffbe6;
-}
-.container {
-  margin-top: -120px;
-  margin-bottom: 30px;
+  margin-top: 80px;
+  margin-bottom: 80px;
 }
 
-form {
-  background-color: none;
+.custom-row {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 960px;
+  padding: 20px;
+  height: auto;
+  min-height: 530px;
+}
+
+.custom-col {
+  width: 100%;
+  max-width: 350px;
+  background-color: #fffbe6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding-left: 20px;
   padding-right: 20px;
-  border: 3px solid#ff9100;
-  border-radius: 8px;
+  border: 3px solid #ff9100;
   padding-bottom: 20px;
-  opacity: 1;
+  overflow-y: auto;
 }
-.form-text {
-  font-size: 15px;
-  color: black;
-  font-weight: 700;
-}
-.form-input {
-  background: #fffbe6;
-  border: none;
-  border-bottom: 3px solid#ff9100;
-}
-.form-input:hover {
-  border: 3px solid#ff9100;
-}
-.form-input:focus {
-  outline: none; /* Varsayılan outline kenarlığını kaldırır */
-  border-color: #ff9100; /* Kenarlığı yeşil yapar */
-  border: 3px solid#ff9100;
-  box-shadow: none;
-  background-color: none;
-}
-.form-input-date {
-  width: 250px;
-  font-size: 10px;
-  border: none;
-  border: 3px solid#ff9100;
-  border-radius: 5px;
-  padding: 10px;
-  background-color: #fffbe6;
-}
-.form-input-date:hover {
-  cursor: pointer;
-  border: 3px solid#ff9100;
-}
-.form-input-date:focus {
-  outline: none; /* Varsayılan outline kenarlığını kaldırır */
-  border: 3px solid#ff9100;
 
+.custom-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-form-group {
+  margin-bottom: 20px;
+  text-align: center; /* Centers the label */
+}
+
+.custom-form-input:focus {
+  outline: none;
+  border-color: #ff9100;
   box-shadow: none;
 }
-.login-button {
-  background-color: #00712d;
-  border: none;
-}
-.login-button:hover {
-  background-color: #00712d;
-  opacity: 0.7;
-}
-link {
-  text-align: left;
-}
-.kayıt {
-  color: white;
-  border: none;
-  font-size: 15px;
+
+.custom-form-text {
   font-weight: bold;
-  background-color: rgb(30, 74, 30);
-  text-decoration: dashed;
-  padding: 5px;
-  border-radius: 5px;
-}
-.kayıt:hover {
-  font-size: 20px;
-  text-decoration: dashed;
-  transition: all 0.5s ease; /* Animasyon geçişi */
+  text-align: center;
 }
 .error-alert {
   font-size: 15px;
@@ -113,27 +85,89 @@ link {
   margin-right: 10px;
   font-size: 12px;
 }
-.form-label {
-  font-size: 15px;
-  color: black;
-  font-weight: 700;
+.custom-form-input {
+  border: none;
+  width: 90%;
+  padding: 12px;
+  border-bottom: 2px solid #ff9100;
+  border-radius: 4px;
+  background-color: #fffbe6;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
-@media screen and (max-width: 960px) {
-  form {
-    width: 100%;
-    max-width: 400px; /* Formun genişliğini sınırla */
-    margin: auto; /* Formu ortala */
-    border: 3px solid#ff9100;
-    border-radius: 5px;
-  }
-  .container {
-    width: 100%;
-    margin-top: -20px;
-  }
-  .form-text {
-    font-size: 15px;
-    color: black;
-    font-weight: 700;
-  }
+.custom-login-button {
+  background-color: #00712d;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+}
+.custom-dob-inputs {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Adds spacing between each select element */
+  margin-top: 10px;
+}
+
+.custom-dob-inputs select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #ff9100;
+  background-color: #fffbe6;
+  color: #333;
+  font-size: 16px;
+  appearance: none; /* Removes the default select arrow */
+  -webkit-appearance: none; /* For Safari */
+  -moz-appearance: none; /* For Firefox */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23ff9100" height="24" width="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>'); /* Custom arrow */
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  cursor: pointer;
+}
+
+.custom-dob-inputs select:focus {
+  border-color: #00712d; /* Focus border color */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 113, 45, 0.5); /* Green shadow on focus */
+}
+
+.custom-dob-inputs option {
+  color: #333;
+  background-color: #fffbe6;
+}
+
+.custom-success-alert {
+  background-color: #d4edda;
+  padding: 10px;
+  border-radius: 4px;
+  color: #155724;
+  margin-top: 20px;
+}
+
+.custom-error-alert {
+  background-color: #ffcccc;
+  padding: 10px;
+  border-radius: 4px;
+  color: #ff0000;
+  margin-top: 20px;
+}
+
+.kvkk {
+  display: block;
+  margin-top: 15px;
+  font-size: 15px;
+  text-align: center;
+  margin-top: 30px;
+  color: blue;
+}
+.kvkk-kutu {
+  text-align: center;
+  margin-top: 20px;
+  color: #ff9100;
 }

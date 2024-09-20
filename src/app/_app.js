@@ -1,4 +1,4 @@
-import { AuthProvider } from "../app/contexts/AuthContext";
+import { AuthProvider } from "../context/AuthContext";
 
 function MyApp({ Component, pageProps }) {
   return (
