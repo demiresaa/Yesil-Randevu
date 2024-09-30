@@ -35,7 +35,7 @@ export function Login() {
         console.log("Giriş başarılı!", data.user);
         // Email kontrolü
         if (data.user.email === "demiresa38@gmail.com") {
-          window.location.href = "/randevu2";
+          window.location.href = "/admin";
         } else {
           window.location.href = "/home2";
         }
