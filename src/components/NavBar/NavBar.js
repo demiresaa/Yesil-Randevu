@@ -31,7 +31,7 @@ function NavBar() {
       console.error("Çıkış yapılırken hata oluştu:", error);
     } else {
       setUser(null);
-      router.push("/");
+      router.push("/login");
     }
   };
 

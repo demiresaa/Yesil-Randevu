@@ -58,11 +58,13 @@ export function Kayit() {
         return;
       }
 
+      const userID = data.user.id; // userID'yi burada tanımlıyoruz
+
       const { error: insertError } = await supabase
         .from("user-details")
         .insert([
           {
-            id: data.user.id,
+            userID,
             name,
             phoneNumber,
             address,
@@ -80,7 +82,7 @@ export function Kayit() {
       console.log("Kayıt başarılı:", data);
       setSuccess(true);
       setTimeout(() => {
-        router.push("/kayit");
+        router.push("/login");
       }, 1500);
     } catch (error) {
       setError("Beklenmeyen bir hata oluştu: " + error.message);

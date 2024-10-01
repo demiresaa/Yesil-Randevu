@@ -4,7 +4,7 @@
   text-align: center;
   padding: 20px;
   color: #333;
-  max-width: 80%;
+  max-width: 70%;
   margin: 0 auto;
   margin-top: 150px;
 }
@@ -22,6 +22,7 @@
 .hero-sectionn h1 {
   font-size: 2.5rem;
   margin-bottom: 10px;
+  font-family: "Playfair Display", serif;
 }
 
 .hero-sectionn p {
@@ -45,7 +46,8 @@
   font-size: 2rem;
   margin-bottom: 10px;
   font-weight: 700;
-  color: #00712d;
+  color: #ff9100;
+  font-family: "Playfair Display", serif;
 }
 
 .mission-visionn p {
@@ -73,6 +75,7 @@
   margin-bottom: 15px;
   color: #00712d;
   font-weight: 700;
+  font-family: "Playfair Display", serif;
 }
 
 .info-sectionn p {

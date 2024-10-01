@@ -46,15 +46,20 @@ export const AppointmentProvider = ({ children }) => {
   }, [appointments]);
 
   const addAppointment = async (appointment) => {
-    const { data, error } = await supabase
-      .from("appointments")
-      .insert([appointment])
-      .select();
+    try {
+      const { data, error } = await supabase
+        .from("appointments")
+        .insert([appointment])
+        .select();
 
-    if (error) {
-      console.error("Error adding appointment to Supabase:", error);
-    } else {
-      setAppointments((prevAppointments) => [...prevAppointments, data[0]]);
+      if (error) {
+        console.error("Error adding appointment to Supabase:", error);
+      } else {
+        console.log("Appointment added successfully:", data);
+        setAppointments((prevAppointments) => [...prevAppointments, data[0]]);
+      }
+    } catch (error) {
+      console.error("Unexpected error adding appointment:", error);
     }
   };
 

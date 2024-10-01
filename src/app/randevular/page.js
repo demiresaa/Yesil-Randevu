@@ -5,71 +5,7 @@ import "./page.css";
 import { withAuth } from "../../components/withAuth";
 
 const Randevu = () => {
-  const [appointments] = useState([
-    {
-      id: 1,
-      category: "Diş Muayenesi",
-      rating: 4.5,
-      date: "2024-08-15",
-      isApproved: false,
-    },
-    {
-      id: 2,
-      category: "Göz Muayenesi",
-      rating: 4.0,
-      date: "2024-08-22",
-      isApproved: false,
-    },
-    {
-      id: 3,
-      category: "Genel Sağlık Kontrolü",
-      rating: 5.0,
-      date: "2024-09-10",
-      isApproved: false,
-    },
-    {
-      id: 4,
-      category: "Diş Muayenesi",
-      rating: 4.5,
-      date: "2024-08-15",
-      isApproved: false,
-    },
-    {
-      id: 5,
-      category: "Diş Muayenesi",
-      rating: 4.5,
-      date: "2024-08-15",
-      isApproved: false,
-    },
-    {
-      id: 6,
-      category: "Diş Muayenesi",
-      rating: 4.5,
-      date: "2024-08-15",
-      isApproved: false,
-    },
-    {
-      id: 7,
-      category: "Diş Muayenesi",
-      rating: 4.5,
-      date: "2024-08-15",
-      isApproved: false,
-    },
-    {
-      id: 8,
-      category: "Diş Muayenesi",
-      rating: 4.5,
-      date: "2024-08-15",
-      isApproved: false,
-    },
-    {
-      id: 9,
-      category: "Diş Muayenesi",
-      rating: 4.5,
-      date: "2024-08-15",
-      isApproved: false,
-    },
-  ]);
+  const [appointments] = useState([]);
 
   return (
     <div className="appointments-container">

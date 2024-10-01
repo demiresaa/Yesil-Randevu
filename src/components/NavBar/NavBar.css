@@ -63,9 +63,9 @@
   margin-left: 10px;
 }
 .nav-item1:hover {
-  border: none;
-  border: #ff9100 3px solid;
+  border-top: #ff9100 3px solid;
   border-radius: 20px;
+  border-bottom: none;
 }
 .nav-item:after {
   content: "";
@@ -118,10 +118,13 @@
   .nav-item {
     padding-top: 15px;
     padding-bottom: 15px;
+    margin-left: -20px;
+  }
+  .nav-item1 {
+    margin-left: -30px;
   }
 
   .nav-links {
-    padding: 1.5rem;
     width: 100%;
     display: table;
   }
