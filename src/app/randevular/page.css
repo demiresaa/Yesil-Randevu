@@ -1,5 +1,5 @@
-.appointments-container {
-  max-width: 800px;
+.appointments-containerr {
+  max-width: 80%;
   margin: 50px auto;
   padding: 20px;
   background-color: #fff;
@@ -9,7 +9,7 @@
   margin-bottom: 380px;
 }
 
-.appointments-container h2 {
+.appointments-containerr h2 {
   margin: 0;
   font-size: 20px; /* Küçültülmüş başlık font boyutu */
   text-align: center;
@@ -21,7 +21,7 @@
   flex-direction: column;
 }
 
-.appointments-header,
+.appointments-headerr,
 .appointments-row {
   display: flex;
   justify-content: space-between;
@@ -29,52 +29,43 @@
   border-bottom: 1px solid #ddd;
 }
 
-.appointments-header-item {
+.appointments-header-itemm {
   font-weight: bold;
   flex: 1;
-  text-align: center;
   font-size: 14px; /* Küçültülmüş başlık font boyutu */
-}
-
-.appointments-item {
-  flex: 1;
   text-align: center;
+}
+
+.appointments-itemm {
+  flex: 1;
+  text-align: left;
   font-size: 14px; /* Küçültülmüş veri font boyutu */
-}
-
-.btn-approve {
-  background: linear-gradient(to left, #56d001, #9bec00);
-  color: white;
-}
-.btn-approve:hover {
-  background: linear-gradient(to right, #56d001, #9bec00);
-  color: white;
-}
-
-.btn-delete {
-  background-color: #f44336;
-  color: white;
-}
-
-.approved-icon {
-  font-size: 16px; /* Onay işareti font boyutu */
 }
 
 .appointments-row:last-child {
   border-bottom: none;
 }
+.btn-delete {
+  background-color: #f44336;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
 
 /* Mobil cihazlar için stil ayarları */
 @media screen and (max-width: 768px) {
-  .appointments-container {
+  .appointments-containerr {
     padding: 15px;
     margin: 20px auto;
     width: 80%;
-    margin-bottom: 30px;
     margin-top: 30px;
+    padding-bottom: 450px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
-  .appointments-container h2 {
+  .appointments-containerr h2 {
     font-size: 20px; /* Mobilde başlık font boyutu */
     margin-bottom: 15px;
   }
@@ -86,14 +77,16 @@
   }
 
   .appointments-header-item,
-  .appointments-item {
+  .appointments-itemm {
     font-size: 12px; /* Mobilde yazı font boyutu */
-    text-align: left;
+    text-align: center;
   }
 
-  .appointments-item {
+  .appointments-itemm {
     padding: 10px 0;
     border-bottom: 1px solid #eee;
+    font-size: 8px;
+    text-align: center;
   }
 
   .appointments-actions {
@@ -104,7 +97,7 @@
     margin-top: 10px;
   }
 
-  .btn {
+  .btn-delete {
     padding: 4px 8px;
     font-size: 10px; /* Mobilde buton font boyutu */
   }

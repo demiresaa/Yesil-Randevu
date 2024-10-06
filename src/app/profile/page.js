@@ -27,7 +27,7 @@ const Profile = () => {
         const { data, error } = await supabase
           .from("user-details")
           .select("*")
-          .eq("id", user.id)
+          .eq("userID", user.id)
           .single();
 
         if (error) {

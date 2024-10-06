@@ -51,11 +51,14 @@ function NavBar() {
                 Ana Sayfa
               </Link>
             </li>
-            <li onClick={handleClick} className="nav-item">
-              <Link href="/hakkimizda" className="nav-links">
-                Hakkımızda
-              </Link>
-            </li>
+            {/* Hakkımızda bağlantısını yalnızca kullanıcı giriş yapmadığında göster */}
+            {!user && (
+              <li onClick={handleClick} className="nav-item">
+                <Link href="/hakkimizda" className="nav-links">
+                  Hakkımızda
+                </Link>
+              </li>
+            )}
             {user ? (
               <>
                 <li onClick={handleClick} className="nav-item">
@@ -68,6 +71,14 @@ function NavBar() {
                     Randevularım
                   </Link>
                 </li>
+                {/* Kullanıcı e-posta adresi kontrolü */}
+                {user.email === "demiresa38@gmail.com" && (
+                  <li onClick={handleClick} className="nav-item">
+                    <Link href="/raporlar" className="nav-links">
+                      Raporlar
+                    </Link>
+                  </li>
+                )}
                 <li onClick={handleClick} className="nav-item nav-item1">
                   <a href="#" className="nav-links" onClick={handleSignOut}>
                     <Person className="bi bi-person" /> Çıkış Yap

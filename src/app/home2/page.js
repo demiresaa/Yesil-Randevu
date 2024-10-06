@@ -9,7 +9,7 @@ import { AppointmentContext } from "../../context/AppointmentContext";
 import { useAuth } from "../../context/AuthContext";
 import { supabase } from "../../../lib/supabaseClient"; // supabase istemcisini doğru şekilde içe aktarın
 
-const Home2 = () => {
+const Home2 = ({ setIsBanned }) => {
   const { user } = useAuth(); // AuthContext'ten kullanıcı bilgilerini al
   const { addAppointment } = useContext(AppointmentContext); // AppointmentContext'ten addAppointment fonksiyonunu al
   const [selectedValues, setSelectedValues] = useState([]);
@@ -56,15 +56,15 @@ const Home2 = () => {
       if (user) {
         try {
           const { data, error } = await supabase
-            .from("user-score")
-            .select("total_score") // Fetch the total_score column
+            .from("user-details")
+            .select("totalScore") // Fetch the total_score column
             .eq("userID", user.id) // Match the authenticated user ID
             .single();
 
           if (error) {
             console.error("Error fetching user score:", error);
           } else {
-            setTotalScore(data.total_score); // Set the total score in state
+            setTotalScore(data.totalScore); // Set the total score in state
           }
         } catch (error) {
           console.error("Error fetching user score:", error.message);
@@ -322,6 +322,7 @@ const Home2 = () => {
         </div>
       )}
       <button
+        disabled={setIsBanned}
         className={styles.randevuButton}
         onClick={isSelectVisible ? handleRandevuOlustur : handleButtonClick}
       >

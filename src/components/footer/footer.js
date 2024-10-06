@@ -27,7 +27,7 @@ const Footer = () => {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="https://www.instagram.com">
               <Envelope />
             </a>
           </li>
