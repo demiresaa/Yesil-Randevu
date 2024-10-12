@@ -5,11 +5,11 @@ import "./page.css";
 import { withAuth } from "../../components/withAuth";
 import { supabase } from "../../../lib/supabaseClient";
 
-const Randevu = ({ setIsBanned }) => {
+const Randevu = () => {
   // setIsBanned'i props olarak al
   const [appointments, setAppointments] = useState([]);
   const [cancelCount, setCancelCount] = useState(0); // İptal sayısı
-
+  const [isBanned, setIsBanned] = useState(false);
   // Fetch appointments from Supabase
   const fetchAppointments = async () => {
     const { data, error } = await supabase

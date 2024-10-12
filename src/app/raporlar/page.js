@@ -56,26 +56,27 @@ const Raporlar = () => {
   };
 
   const downloadAppointments = () => {
-    const appointmentsText = appointments
-      .map((appointment) => {
-        return `Kategori: ${appointment.category}, Başlangıç: ${new Date(
-          appointment.start_date
-        ).toLocaleString()}, Bitiş: ${new Date(
-          appointment.end_date
-        ).toLocaleString()}, Puan: ${appointment.score}, Adres: ${
-          userDetails[appointment.userID] || "Adres bilgisi yok"
-        }`;
-      })
-      .join("\n\n"); // İki yeni satır karakteri eklenerek boşluk oluşturuldu
+    window.print();
+    // const appointmentsText = appointments
+    //   .map((appointment) => {
+    //     return `Kategori: ${appointment.category}, Başlangıç: ${new Date(
+    //       appointment.start_date
+    //     ).toLocaleString()}, Bitiş: ${new Date(
+    //       appointment.end_date
+    //     ).toLocaleString()}, Puan: ${appointment.score}, Adres: ${
+    //       userDetails[appointment.userID] || "Adres bilgisi yok"
+    //     }`;
+    //   })
+    //   .join("\n\n"); // İki yeni satır karakteri eklenerek boşluk oluşturuldu
 
-    const blob = new Blob([appointmentsText], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = "randevular.txt";
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
+    // const blob = new Blob([appointmentsText], { type: "text/plain" });
+    // const url = URL.createObjectURL(blob);
+    // const a = document.createElement("a");
+    // a.href = url;
+    // a.download = "randevular.txt";
+    // document.body.appendChild(a);
+    // a.click();
+    // document.body.removeChild(a);
   };
 
   return (

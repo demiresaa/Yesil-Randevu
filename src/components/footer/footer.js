@@ -5,7 +5,7 @@ import { Instagram, Facebook, Envelope } from "react-bootstrap-icons";
 
 const Footer = () => {
   return (
-    <footer className="footer">
+    <footer className="footer no-print">
       <div className="footer-content">
         <ul className="footer-links">
           <li>

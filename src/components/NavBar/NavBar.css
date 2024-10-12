@@ -9,6 +9,12 @@
   z-index: 20;
 }
 
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
 .nav-container {
   display: flex;
   justify-content: center;
