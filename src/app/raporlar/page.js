@@ -17,7 +17,7 @@ const Raporlar = () => {
     const startOfDay = new Date(today.setHours(0, 0, 0, 0));
     const endOfDay = new Date(today.setHours(23, 59, 59, 999));
 
-    // Fetch appointments
+    // Randevuları al
     const { data: appointmentsData, error: appointmentsError } = await supabase
       .from("appointments")
       .select("*")
@@ -30,11 +30,11 @@ const Raporlar = () => {
       return;
     }
 
-    // Fetch user details for each userID found in appointments
+    // Kullanıcı detaylarını al
     const userIds = [...new Set(appointmentsData.map((appt) => appt.userID))];
     const { data: userDetailsData, error: userDetailsError } = await supabase
       .from("user-details")
-      .select("userID, address")
+      .select("userID, address, phoneNumber")
       .in("userID", userIds);
 
     if (userDetailsError) {
@@ -43,40 +43,23 @@ const Raporlar = () => {
       return;
     }
 
-    // Map user details by userID for easy lookup
+    // Kullanıcı detaylarını userID'ye göre eşleştir
     const userDetailsMap = {};
     userDetailsData.forEach((user) => {
-      userDetailsMap[user.userID] = user.address;
+      userDetailsMap[user.userID] = {
+        address: user.address,
+        phoneNumber: user.phoneNumber,
+      };
     });
 
     setAppointments(appointmentsData);
-    setUserDetails(userDetailsMap); // Store user details in state
+    setUserDetails(userDetailsMap);
     setShowTable(true);
     setLoading(false);
   };
 
   const downloadAppointments = () => {
     window.print();
-    // const appointmentsText = appointments
-    //   .map((appointment) => {
-    //     return `Kategori: ${appointment.category}, Başlangıç: ${new Date(
-    //       appointment.start_date
-    //     ).toLocaleString()}, Bitiş: ${new Date(
-    //       appointment.end_date
-    //     ).toLocaleString()}, Puan: ${appointment.score}, Adres: ${
-    //       userDetails[appointment.userID] || "Adres bilgisi yok"
-    //     }`;
-    //   })
-    //   .join("\n\n"); // İki yeni satır karakteri eklenerek boşluk oluşturuldu
-
-    // const blob = new Blob([appointmentsText], { type: "text/plain" });
-    // const url = URL.createObjectURL(blob);
-    // const a = document.createElement("a");
-    // a.href = url;
-    // a.download = "randevular.txt";
-    // document.body.appendChild(a);
-    // a.click();
-    // document.body.removeChild(a);
   };
 
   return (
@@ -99,6 +82,7 @@ const Raporlar = () => {
                   <th>Başlangıç</th>
                   <th>Bitiş</th>
                   <th>Adres</th>
+                  <th>Telefon No</th>
                 </tr>
               </thead>
               <tbody>
@@ -108,7 +92,12 @@ const Raporlar = () => {
                     <td>{new Date(appointment.start_date).toLocaleString()}</td>
                     <td>{new Date(appointment.end_date).toLocaleString()}</td>
                     <td>
-                      {userDetails[appointment.userID] || "Adres bilgisi yok"}
+                      {userDetails[appointment.userID]?.address ||
+                        "Adres bilgisi yok"}
+                    </td>
+                    <td>
+                      {userDetails[appointment.userID]?.phoneNumber ||
+                        "Telefon bilgisi yok"}
                     </td>
                   </tr>
                 ))}

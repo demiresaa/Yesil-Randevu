@@ -7,10 +7,18 @@ const Hakkimizda = () => {
   return (
     <div className="home-containerr">
       <section className="hero-sectionn">
-        <h1>E-Atıkları Geri Dönüştür, Doğayı Koru!</h1>
+        <h1>Elektronik Atık Nedir ve Dönüşümleri Neden Önemlidir?</h1>
         <p>
-          E-atıkların doğru şekilde geri dönüştürülmesi, doğal kaynaklarımızı
-          koruma ve çevre kirliliğini azaltma konusunda kritik öneme sahiptir.
+          Atık Elektrikli ve Elektronik Eşyaların Kontrolü Yönetmeliği’ne göre
+          elektronik eşya kapsamına giren ve kullanım ömrünü tamamlamış veya
+          kullanıcı tarafından artık kullanılmak istenmeyen tüm cihazlar e-atık
+          olarak nitelendirilir. E-atıkların büyük çoğunluğu bromlu alev
+          geciktirici, klorlu solventler, PVC, zararlı metaller, kurşun, cıva,
+          berilyum, kadmiyum gibi çevreye dağılması durumunda ciddi oranda
+          kirliliğe neden olacak, doğal yaşam alanlarına ve insan hayatına ciddi
+          zarar verebilecek kimyasallar içerir. E-atıkların toplanması ile çevre
+          kirliliğinin engellenmesinin yanı sıra e-atıkların içerdiği değerli
+          malzemelerin geri kazanılması ile enerji tasarrufu sağlanır.
         </p>
       </section>
 
@@ -18,30 +26,24 @@ const Hakkimizda = () => {
         <div className="missionn">
           <h2>Misyonumuz</h2>
           <p>
-            Misyonumuz, elektronik atıkların çevre dostu ve sürdürülebilir bir
-            şekilde geri dönüştürülmesini sağlamak, böylece çevremizi ve doğal
-            kaynaklarımızı korumaktır.
+            Elektronik atıkların doğru ve sürdürülebilir şekilde toplanmasını
+            teşvik ederek, çevreye zarar veren atıkların geri dönüşümünü
+            sağlamak ve toplumda çevre bilinci oluşturmaktır ödüllendirme
+            sistemine dayalı yenilikçi mobil uygulamamız aracılığıyla
+            kullanıcıların bu sürece aktif katılımını kolaylaştırarak, daha
+            temiz ve sağlıklı yaşam alanlarının oluşturulmasına katkıda
+            bulunmak.
           </p>
         </div>
         <div className="visionn">
           <h2>Vizyonumuz</h2>
           <p>
-            Vizyonumuz, e-atık yönetiminde lider bir rol üstlenmek ve toplumu
-            çevre bilinci konusunda bilinçlendirerek, daha temiz ve yeşil bir
-            gezegen yaratmaktır.
+            Elektronik atıkların yönetiminde lider bir platform olarak, toplumun
+            çevresel sorumluluğunu arttıran çözümler sunmak ve çevreye duyarlı
+            bir gelecek için dönüşüm süreçlerini küresel ölçekte
+            yaygınlaştırmak.
           </p>
         </div>
-      </section>
-
-      <section className="info-sectionn">
-        <h2>E-atık Nedir ve Neden Önemlidir?</h2>
-        <p>
-          E-atık, eski veya işlevsiz elektronik cihazlardan oluşan atıklardır.
-          Bu atıkların çoğu, zararlı kimyasallar ve ağır metaller içerebilir, bu
-          da çevre ve insan sağlığı için büyük riskler oluşturur. E-atıkları
-          uygun şekilde geri dönüştürmek, bu zararlı maddelerin doğaya
-          yayılmasını önler ve değerli malzemelerin yeniden kullanımını sağlar.
-        </p>
       </section>
     </div>
   );

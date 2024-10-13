@@ -39,7 +39,7 @@ function NavBar() {
 
   return (
     <>
-      <nav className="navbar">
+      <nav className="navbar no-print">
         <div className="nav-container">
           <Link href={homeLink} className="nav-logo">
             <span>Yeşil Randevu</span>

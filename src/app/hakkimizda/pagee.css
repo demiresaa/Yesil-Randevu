@@ -20,6 +20,7 @@
 }
 
 .hero-sectionn h1 {
+  color: #ff9100;
   font-size: 2.5rem;
   margin-bottom: 10px;
   font-family: "Playfair Display", serif;
@@ -27,7 +28,10 @@
 
 .hero-sectionn p {
   font-size: 1.2rem;
-  font-weight: bold;
+  border-bottom: white 3px solid;
+  border-right: white 3px solid;
+  border-radius: 20px;
+  padding: 20px;
 }
 
 .mission-visionn {
@@ -48,6 +52,7 @@
   font-weight: 700;
   color: #ff9100;
   font-family: "Playfair Display", serif;
+  margin-top: 20px;
 }
 
 .mission-visionn p {
@@ -60,28 +65,11 @@
   border-left: #00712d 3px solid;
 
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 20px;
 }
-
-.info-sectionn {
-  background-color: #f9f9f9;
-  opacity: 0.9;
-  border-radius: 50px;
-  padding: 20px;
-}
-
-.info-sectionn h2 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  color: #00712d;
-  font-weight: 700;
-  font-family: "Playfair Display", serif;
-}
-
-.info-sectionn p {
-  font-size: 1rem;
-  line-height: 1.6;
-  font-weight: bold;
+.visionn {
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 @media (max-width: 768px) {
