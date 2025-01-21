@@ -10,7 +10,7 @@ const Footer = () => {
         <ul className="footer-links">
           <li>
             <a
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/yesilrandevu/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -19,7 +19,7 @@ const Footer = () => {
           </li>
           <li>
             <a
-              href="https://www.facebook.com"
+              href="https://www.instagram.com/yesilrandevu/"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -27,9 +27,7 @@ const Footer = () => {
             </a>
           </li>
           <li>
-            <a href="https://www.instagram.com">
-              <Envelope />
-            </a>
+            <a>yesilrandevu@gmail.com</a>
           </li>
         </ul>
       </div>

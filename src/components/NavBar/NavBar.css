@@ -1,6 +1,6 @@
 .navbar {
   background: #00712d;
-  height: 80px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -94,6 +94,10 @@
   display: inline-block;
   width: 2rem;
   height: 2rem;
+}
+.logo {
+  border-radius: 15px;
+  margin-top: 5px;
 }
 
 @media screen and (max-width: 960px) {

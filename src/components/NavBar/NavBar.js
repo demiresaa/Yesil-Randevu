@@ -4,6 +4,7 @@ import { HamburgetMenuClose, HamburgetMenuOpen } from "./Icon.js";
 import { Person } from "react-bootstrap-icons";
 import { supabase } from "../../../lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import "./NavBar.css";
 
@@ -42,7 +43,15 @@ function NavBar() {
       <nav className="navbar no-print">
         <div className="nav-container">
           <Link href={homeLink} className="nav-logo">
-            <span>Yeşil Randevu</span>
+            <span>
+              <Image
+                className="logo"
+                src="/1.jpeg" // Remove the full public path here
+                alt="My Image"
+                width={90}
+                height={90}
+              />
+            </span>
           </Link>
 
           <ul className={click ? "nav-menu active" : "nav-menu"}>
